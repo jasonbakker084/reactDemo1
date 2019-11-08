@@ -1,24 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Name from './name';
+import { NamesAmount } from './name';
 import logo from './logo.svg';
 import './App.css';
 
+const names = ['Wesley', 'Robert', 'jan', 'Henk']
+
 function App() {
+  const [selectedName, setSelectedName] = useState('test');
+  const handleClick = (name) => {
+    setSelectedName(name)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <NamesAmount amountOfNames={names.length} />
+        {
+          names.map((name, index) => {
+            return (<Name index={index}
+              seperator="--->"
+              name={name}
+              handleClick={handleClick}
+            />)
+          })
+
+        }
+        selected user: {selectedName}
       </header>
+      selected user: {selectedName}
     </div>
   );
 }
